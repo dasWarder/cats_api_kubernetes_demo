@@ -1,0 +1,15 @@
+spring:
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog-master.xml
+  datasource:
+    url: jdbc:postgresql://localhost:5444/cats-api
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+
