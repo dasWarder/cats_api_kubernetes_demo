@@ -2,16 +2,18 @@ package com.babichev.kubernetes_project_demo.mapper;
 
 import com.babichev.kubernetes_project_demo.dto.CatDTO;
 import com.babichev.kubernetes_project_demo.entity.Cat;
-import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
-@Mapper(uses = CatDTO.class)
+import java.util.List;
+
+
 public interface CatMapper {
-    CatMapper CAT_MAPPER = Mappers.getMapper(CatMapper.class);
 
     CatDTO fromCat(Cat cat);
 
-    @InheritInverseConfiguration
+    List<CatDTO> fromCatList(List<Cat> catList);
+
     Cat fromCatDTO(CatDTO catDTO);
+
+    List<Cat> fromCatDTOList(List<CatDTO> catDTOList);
 }

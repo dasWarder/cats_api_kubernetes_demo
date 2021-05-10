@@ -3,32 +3,27 @@ package com.babichev.kubernetes_project_demo.controller;
 
 import com.babichev.kubernetes_project_demo.dto.CatDTO;
 import com.babichev.kubernetes_project_demo.entity.Cat;
-import com.babichev.kubernetes_project_demo.repository.CatRepository;
+import com.babichev.kubernetes_project_demo.service.CatService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import static com.babichev.kubernetes_project_demo.mapper.CatMapper.CAT_MAPPER;
 
 @RestController
 @RequestMapping("/cats")
+@RequiredArgsConstructor
 public class CatController {
 
-    private final CatRepository catRepository;
-
-    @Autowired
-    public CatController(CatRepository catRepository) {
-        this.catRepository = catRepository;
-    }
+    private final CatService catService;
 
     @PostMapping
-    @ResponseBody
-    public Cat save(CatDTO catDTO) {
-        Cat cat = CAT_MAPPER.fromCatDTO(catDTO);
-        Cat savedCat = catRepository.save(cat);
-
+    public Cat save(@RequestBody CatDTO catDTO) {
+        Cat savedCat = catService.save(catDTO);
         return savedCat;
+    }
+
+    @GetMapping
+    public Iterable<Cat> getAll() {
+        return catService.getAll();
     }
 }

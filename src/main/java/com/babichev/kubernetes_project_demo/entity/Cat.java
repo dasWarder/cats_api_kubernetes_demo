@@ -1,24 +1,28 @@
 package com.babichev.kubernetes_project_demo.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "cats-api")
+@Table
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Accessors(chain = true)
 public class Cat {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
     @Column(name = "birth_date")
