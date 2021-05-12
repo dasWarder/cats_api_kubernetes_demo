@@ -5,6 +5,7 @@ import com.babichev.kubernetes_project_demo.entity.Cat;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +23,12 @@ public class MapperImpl implements CatMapper{
 
     @Override
     public List<CatDTO> fromCatList(List<Cat> catList) {
-        return null;
+        List<CatDTO> catDTOList = new ArrayList<>();
+
+        catList.stream()
+                .forEach(cat -> catDTOList.add(new CatDTO(cat.getName(), cat.getBirthDate())));
+
+        return catDTOList;
     }
 
     @Override
@@ -37,6 +43,14 @@ public class MapperImpl implements CatMapper{
 
     @Override
     public List<Cat> fromCatDTOList(List<CatDTO> catDTOList) {
-        return null;
+        List<Cat> catList = new ArrayList<>();
+
+        catDTOList.stream()
+                .forEach(cat -> catList.add(new Cat()
+                                                .setName(cat.getName())
+                                                .setBirthDate(cat.getBirthDay())
+                                                .setCreatedAt(LocalDateTime.now())));
+
+        return catList;
     }
 }

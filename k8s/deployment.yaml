@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cats-api
+spec:
+  selector:
+    matchLabels:
+      app: cats-api
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: cats-api
+    spec:
+      containers:
+        - name: cats-api
+          image: babichevandrey/cats-api:1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATASOURCE_HOST
+              value: 192.168.56.1
