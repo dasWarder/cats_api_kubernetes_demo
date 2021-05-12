@@ -6,6 +6,7 @@ import com.babichev.kubernetes_project_demo.entity.Cat;
 import com.babichev.kubernetes_project_demo.service.CatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -25,5 +26,11 @@ public class CatController {
     @GetMapping
     public Iterable<Cat> getAll() {
         return catService.getAll();
+    }
+
+    @DeleteMapping
+    public ResponseEntity delete(@RequestParam("id") int id) {
+        catService.delete(id);
+        return ResponseEntity.ok("The cat with id=" + id +" was successfully deleted!");
     }
 }

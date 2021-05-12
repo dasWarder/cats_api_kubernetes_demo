@@ -41,4 +41,10 @@ public class CatServiceImpl implements CatService{
         notNull(all, "The list must not be null");
         return all;
     }
+
+    @Override
+    public void delete(int id) {
+        catRepository.deleteById(id);
+        log.info("The cat with id={} was successfully deleted", id);
+    }
 }

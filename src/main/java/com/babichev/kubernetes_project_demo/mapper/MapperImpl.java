@@ -14,9 +14,9 @@ import java.util.UUID;
 public class MapperImpl implements CatMapper{
     @Override
     public CatDTO fromCat(Cat cat) {
-        CatDTO catDTO = new CatDTO()
-                .setName(cat.getName())
-                .setBirthDay(cat.getBirthDate());
+        CatDTO catDTO = CatDTO.builder()
+                .name(cat.getName())
+                .birthDay(cat.getBirthDate()).build();
 
         return catDTO;
     }
@@ -26,17 +26,19 @@ public class MapperImpl implements CatMapper{
         List<CatDTO> catDTOList = new ArrayList<>();
 
         catList.stream()
-                .forEach(cat -> catDTOList.add(new CatDTO(cat.getName(), cat.getBirthDate())));
+                .forEach(cat -> catDTOList.add(CatDTO.builder()
+                        .name(cat.getName())
+                        .birthDay(cat.getBirthDate()).build()));
 
         return catDTOList;
     }
 
     @Override
     public Cat fromCatDTO(CatDTO catDTO) {
-        Cat cat = new Cat()
-                .setName(catDTO.getName())
-                .setBirthDate(catDTO.getBirthDay())
-                .setCreatedAt(LocalDateTime.now());
+        Cat cat = Cat.builder()
+                .name(catDTO.getName())
+                .birthDate(catDTO.getBirthDay())
+                .createdAt(LocalDateTime.now()).build();
 
         return cat;
     }
@@ -46,10 +48,10 @@ public class MapperImpl implements CatMapper{
         List<Cat> catList = new ArrayList<>();
 
         catDTOList.stream()
-                .forEach(cat -> catList.add(new Cat()
-                                                .setName(cat.getName())
-                                                .setBirthDate(cat.getBirthDay())
-                                                .setCreatedAt(LocalDateTime.now())));
+                .forEach(cat -> catList.add(Cat.builder()
+                                                .name(cat.getName())
+                                                .birthDate(cat.getBirthDay())
+                                                .createdAt(LocalDateTime.now()).build()));
 
         return catList;
     }

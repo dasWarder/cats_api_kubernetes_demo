@@ -10,4 +10,6 @@ public interface CatService {
     Cat save(CatDTO catDTO);
 
     Iterable<Cat> getAll();
+
+    void delete(int id);
 }
